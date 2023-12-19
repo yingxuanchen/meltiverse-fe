@@ -2,7 +2,6 @@
   "name": "meltiverse",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://backend:8080/",
   "dependencies": {
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.14",
