@@ -4,12 +4,14 @@ import TagList from "./TagList";
 import { SyntheticEvent, useContext, useState } from "react";
 import { contentStore } from "../../store/contentStore";
 import { sidebarStore } from "../../store/sidebarStore";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const Sidebar = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { state: sidebarState, dispatch: sidebarDispatch } =
     useContext(sidebarStore);
   const { state: contentState } = useContext(contentStore);
+  const { height, width } = useWindowDimensions();
 
   const handleChangeTab = (event: SyntheticEvent, tabIndex: number) => {
     setTabIndex(tabIndex);
@@ -26,8 +28,11 @@ const Sidebar = () => {
   return (
     <Drawer
       sx={{
-        display: { xs: "none", sm: "block" },
-        "& .MuiDrawer-paper": { boxSizing: "border-box", width: 700 },
+        display: "block",
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: width < 700 ? width : 700,
+        },
       }}
       open={sidebarState.open}
       onClose={handleCloseDrawer}
