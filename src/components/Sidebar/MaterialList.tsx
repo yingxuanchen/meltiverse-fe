@@ -56,8 +56,17 @@ const MaterialList = () => {
     [debouncedSearch]
   );
 
+  const fetchTest = async () => {
+    const res = await fetcher(
+      `${process.env.REACT_APP_HOST_URL}/material/test`
+    );
+    const data = await res.json();
+    console.log(data);
+  };
+
   useEffect(() => {
     fetchMaterialList(0);
+    fetchTest();
   }, [fetchMaterialList]);
 
   const handlePageChange = (_event: any | null, page: number) => {
